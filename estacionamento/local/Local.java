@@ -56,4 +56,38 @@ public class Local {
             }
         }
     }
+    
+    /**
+     * Dado os parâmetros, retorna um booleano true para vaga disponível
+     * ou false para vaga indisponível
+     * 
+     * @param local
+     * @param vaga
+     * @return boolean
+     */
+    public boolean conferirDisponibilidadeVaga(Local local, ListaVagas vaga){
+        
+        ArrayList<Bilhete> bilhetes = local.getVeiculosEstacionados();
+        
+        for (Bilhete bilhete : bilhetes) {
+            if (bilhete.getVaga() == vaga) {
+                System.out.println("Vaga indisponível");
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public ListaVagas[] vagasDisponiveis(){
+        
+        ListaVagas[] listaVagas = new ListaVagas[ListaVagas.values().length];
+        int i = 0;
+        for (ListaVagas vaga : ListaVagas.values()) {
+            if (conferirDisponibilidadeVaga(this, vaga)) {
+                listaVagas[i++] = vaga;
+            }
+        }
+        
+        return listaVagas;
+    }
 }
