@@ -62,14 +62,16 @@ public class Sistema {
     }
     
     /**
-     *
+     * Raliza checkout do cliente com base no bilhete dado
+     * 
      * @param codBilhete
      * @param local
      */
     public void checkOut(String codBilhete, Local local){
-        try{
-           
-            Bilhete bilhete = local.getBilhete(codBilhete);
+
+        Bilhete bilhete = local.getBilhete(codBilhete);
+        
+        if (bilhete != null) {
 
             double valorCobrar;
             int horasCobrar = new AuxiliarSistema().calculaTempoCobrar(bilhete.getHoraInicio());
@@ -80,7 +82,8 @@ public class Sistema {
 
             System.out.println("A pagar: R$" + valorCobrar);
             local.removeBilhete(codBilhete);
-
-        }catch(NullPointerException e){System.out.println("Bilhete não existente");}
+            
+        }else System.out.println("Número de bilhete não encontrado!");
     }
+    
 }
