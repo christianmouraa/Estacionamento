@@ -31,9 +31,7 @@ public class Sistema {
      */
     public void checkInComCadastro(Cliente cliente, ListaVagas vaga, Local local){
         
-        AuxiliarSistema aux = new AuxiliarSistema();
-        
-        if (cliente.getVeiculo().getTipoVeiculo() == vaga.getTipoVaga() && aux.conferirDisponibilidadeVaga(local, vaga)) {
+        if (cliente.getVeiculo().getTipoVeiculo() == vaga.getTipoVaga() && local.conferirDisponibilidadeVaga(local, vaga)) {
             
             local.addBilhete(
                 new Bilhete(cliente, vaga)
@@ -52,9 +50,7 @@ public class Sistema {
      */
     public void checkInSemCadastro(Veiculo veiculo, ListaVagas vaga, Local local){
         
-        AuxiliarSistema aux = new AuxiliarSistema();
-        
-        if (veiculo.getTipoVeiculo() == vaga.getTipoVaga() && aux.conferirDisponibilidadeVaga(local, vaga)) {
+        if (veiculo.getTipoVeiculo() == vaga.getTipoVaga() && local.conferirDisponibilidadeVaga(local, vaga)) {
 
             local.addBilhete(
                     new Bilhete(veiculo, vaga)
@@ -71,17 +67,20 @@ public class Sistema {
      * @param local
      */
     public void checkOut(String codBilhete, Local local){
-        
-        Bilhete bilhete = local.getBilhete(codBilhete);
-        
-        double valorCobrar;
-        int horasCobrar = new AuxiliarSistema().calculaTempoCobrar(bilhete.getHoraInicio());
-        
-        VeiculoValor tv = bilhete.getVeiculo().getTipoVeiculo();
-        
-        valorCobrar =  tv.getValor() * horasCobrar;
-        
-        System.out.println("A pagar: R$" + valorCobrar);
-        local.removeBilhete(codBilhete);
+        try{
+           
+            Bilhete bilhete = local.getBilhete(codBilhete);
+
+            double valorCobrar;
+            int horasCobrar = new AuxiliarSistema().calculaTempoCobrar(bilhete.getHoraInicio());
+
+            VeiculoValor tv = bilhete.getVeiculo().getTipoVeiculo();
+
+            valorCobrar =  tv.getValor() * horasCobrar;
+
+            System.out.println("A pagar: R$" + valorCobrar);
+            local.removeBilhete(codBilhete);
+
+        }catch(NullPointerException e){System.out.println("Bilhete não existente");}
     }
 }
