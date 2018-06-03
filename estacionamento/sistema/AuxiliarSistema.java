@@ -25,27 +25,6 @@ public class AuxiliarSistema {
     public AuxiliarSistema(){}
     
     /**
-     * Dado os parâmetros, retorna um booleano true para vaga disponível
-     * ou false para vaga indisponível
-     * 
-     * @param local
-     * @param vaga
-     * @return boolean
-     */
-    public boolean conferirDisponibilidadeVaga(Local local, ListaVagas vaga){
-        
-        ArrayList<Bilhete> bilhetes = local.getVeiculosEstacionados();
-        
-        for (Bilhete bilhete : bilhetes) {
-            if (bilhete.getVaga() == vaga) {
-                System.out.println("Vaga indisponível");
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    /**
      *
      * Baseado na data, hora atual e o tipo de vaga ocupado,
      * gera um código para ser atribuído a um bilhete
