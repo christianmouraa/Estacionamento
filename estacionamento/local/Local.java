@@ -41,20 +41,18 @@ public class Local {
             }
         }
         System.out.println("Bilhete não encontrado");
+        
         return null;
     }
     
     public void removeBilhete(String codBilhete){
-    
+        
         for (Bilhete bilheteAtual : bilhetesAtivos) {
-            if (bilheteAtual.getCodigo().equals(codBilhete)) {
-                
-                if (bilhetesAtivos.remove(bilheteAtual)){
-                    System.out.println("bilhete removido");
-                    
-                }else System.out.println("Erro: Bilhete não removido");
-            }
-        }
+            if (bilheteAtual.getCodigo().equals(codBilhete)) break;        
+        }    
+        this.bilhetesAtivos.remove(getBilhete(codBilhete));
+        
+        System.out.println("Bilhete Removido");
     }
     
     /**
