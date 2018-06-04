@@ -22,6 +22,7 @@ public class Bilhete {
     private Cliente cliente;
     private Veiculo veiculo;
     private final LocalTime horaInicio;
+    private boolean ativo;
     
     /**
      * Construtor para cliente definido
@@ -34,6 +35,7 @@ public class Bilhete {
         this.cliente = cliente;
         this.horaInicio = LocalTime.now();
         this.veiculo = cliente.getVeiculo();
+        this.ativo = true;
     }
 
     /**
@@ -47,6 +49,7 @@ public class Bilhete {
         this.veiculo = veiculo;
         this.vaga = vaga;
         this.horaInicio = LocalTime.now();
+        this.ativo = true;
     }
 
     /**
@@ -103,6 +106,20 @@ public class Bilhete {
      */
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
+    }
+
+    /**
+     * @return the ativo
+     */
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    /**
+     *
+     */
+    public void desativar() {
+        this.ativo = false;
     }
     
 }
