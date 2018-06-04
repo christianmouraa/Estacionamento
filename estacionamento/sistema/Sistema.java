@@ -66,8 +66,10 @@ public class Sistema {
      * 
      * @param codBilhete
      * @param local
+     * @throws NullPointerException se o método não encontrar um bilhete
+     * a partir do código informado
      */
-    public void checkOut(String codBilhete, Local local){
+    public void checkOut(String codBilhete, Local local) throws NullPointerException{
 
         Bilhete bilhete = local.getBilhete(codBilhete);
         
@@ -83,7 +85,6 @@ public class Sistema {
             System.out.println("A pagar: R$" + valorCobrar);
             local.removeBilhete(codBilhete);
             
-        }else System.out.println("Número de bilhete não encontrado!");
+        }else throw new NullPointerException();
     }
-    
 }
