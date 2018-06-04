@@ -21,17 +21,32 @@ public class Local {
         this.bilhetesAtivos = new ArrayList<>();
     }
     
-    
+    /**
+     *
+     * @return
+     */
     public ArrayList getVeiculosEstacionados(){
         
         return this.bilhetesAtivos;
     }
     
+    /**
+     * Adiciona um Bilehte à collection
+     * 
+     * @param bilhete
+     */
     public void addBilhete(Bilhete bilhete) {
             
         this.bilhetesAtivos.add(bilhete);
     }
     
+    /**
+     * Busca um bilehte pelo seu código
+     * 
+     * @param codBilhete
+     * @return uma instância de Bilhete caso exista
+     * ou null para bilhete não encntrado
+     */
     public Bilhete getBilhete(String codBilhete){
         
         for (Bilhete bilhete : bilhetesAtivos) {
@@ -41,18 +56,27 @@ public class Local {
             }
         }
         System.out.println("Bilhete não encontrado");
-        
         return null;
     }
     
+    /**
+     * Remove um bilhete da collection buscando pelo
+     * número do bilehte
+     * 
+     * @param codBilhete
+     */
     public void removeBilhete(String codBilhete){
-        
+        boolean canRemove = false;
         for (Bilhete bilheteAtual : bilhetesAtivos) {
-            if (bilheteAtual.getCodigo().equals(codBilhete)) break;        
-        }    
-        this.bilhetesAtivos.remove(getBilhete(codBilhete));
-        
-        System.out.println("Bilhete Removido");
+            if (bilheteAtual.getCodigo().equals(codBilhete)){ 
+                canRemove = true;
+                break;
+            }        
+        }
+        if (canRemove){
+            this.bilhetesAtivos.remove(getBilhete(codBilhete));
+            System.out.println("Bilhete Removido");
+        }else System.out.println("Bilhete não pôde ser remoovido");
     }
     
     /**
@@ -76,6 +100,10 @@ public class Local {
         return true;
     }
     
+    /**
+     *
+     * @return
+     */
     public ListaVagas[] vagasDisponiveis(){
         
         ListaVagas[] listaVagas = new ListaVagas[ListaVagas.values().length];
